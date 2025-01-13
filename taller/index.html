@@ -382,17 +382,17 @@
 
         const countdownElement = document.getElementById('timer');
         const targetDate = new Date('January 27, 2025 19:00:00');
-        const currentday = new Date();
-        console.log(currentday);
+        const options = { timeZone: 'America/Mexico_City' };
 
         function updateCountdown() {
             const now = new Date();
-            const diff = targetDate - now;
+            const dataHoraMexico = new Date(now.toLocaleString('en-US', { timeZone: 'America/Mexico_City' }));
+            const diff = targetDate - dataHoraMexico;
 
             if (diff <= 0) {
-                countdownElement.textContent = 'O evento já começou!';
-                clearInterval(interval);
-                return;
+            countdownElement.textContent = '¡El evento ya comenzó!';
+            clearInterval(interval);
+            return;
             }
 
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
