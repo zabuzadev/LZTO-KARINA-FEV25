@@ -19,8 +19,9 @@
            <span >
             Evento GRATUITO <span class="underline">Exclusivo</span> para Psicólogas, Terapeutas y Consejeras
            </span>
-            <h4 class="text-lg flex gap-1">
-               <img src="../src/images/icones/calendar-heart.svg" alt="icone de calendario"> DEL 27 AL 30 DE ENERO A LAS 7 PM 🇲🇽
+            <h4 class="text-2xl flex gap-1">
+               <img src="../src/images/icones/calendar-heart.svg" alt="icone de calendario">
+               <span id="timer">Carregando contador...</span> 🇲🇽
             </h4>
         </div>
     </header>
@@ -378,6 +379,32 @@
     
             return true;
         }
+
+        const countdownElement = document.getElementById('timer');
+        const targetDate = new Date('January 27, 2025 19:00:00');
+        const currentday = new Date();
+        console.log(currentday);
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                countdownElement.textContent = 'O evento já começou!';
+                clearInterval(interval);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
